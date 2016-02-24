@@ -1,7 +1,9 @@
 import app from 'app'
 import BrowserWindow from 'browser-window'
 import path from 'path'
+import yargs from 'yargs'
 
+const args = yargs(process.argv.slice(1)).wrap(100).argv
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
@@ -13,20 +15,15 @@ app.on('ready', () => {
         center: true,
         'auto-hide-menu-bar': true,
         frame: true,
-        show: false,
+        show: args.dev ? true : false,
     })
 
-    try {
-        const yargs = require('yargs')
-        const args = yargs(process.argv.slice(1)).wrap(100).argv
-        if (args.dev) {
-            mainWindow.show()
-            mainWindow.toggleDevTools()
-            mainWindow.focus()
-            console.info('Dev Mode Active: Developer Tools Enabled.')
-        }
-    } catch (e) {}
 
+    if (args.dev) {
+        mainWindow.toggleDevTools()
+        mainWindow.focus()
+        console.info('Dev Mode Active: Developer Tools Enabled.')
+    }
 
     mainWindow.loadURL(path.normalize('file://' + path.join(__dirname, '../index.html')))
     mainWindow.webContents.on('new-window', event => event.preventDefault())
