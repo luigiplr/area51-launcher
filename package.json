@@ -14,7 +14,7 @@
     "start": "grunt --dev",
     "release": "grunt release"
   },
-  "electron-version": "0.36.7",
+  "electron-version": "0.36.8",
   "license": "GPL-3.0",
   "dependencies": {
     "async": "^1.5.2",
@@ -54,6 +54,6 @@
     "load-grunt-tasks": "^3.4.0"
   },
   "optionalDependencies": {
-    "electron-prebuilt": "0.36.7"
+    "electron-prebuilt": "0.36.8"
   }
 }
